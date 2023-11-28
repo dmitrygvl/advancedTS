@@ -1,35 +1,39 @@
-// /**
-// Задание к TypeScript: Part 2 будет проверять ваше умение использовать и вычислять типы
-// Все задания устроены таким образом что в них есть тип FIXME (который any) и ваша задача избавится от него
-// Менять код кроме типов нельзя, исходные типы менять тоже нельзя, но можно рефакторить
-// Например `type A = 1 | 2` выразить как `type A1 = 1; type A2 = 2; type A = A1 | A2;`
-// **/
+/**
+Задание к TypeScript: Part 2 будет проверять ваше умение использовать и вычислять типы
+Все задания устроены таким образом что в них есть тип FIXME 
+(который any) и ваша задача избавится от него
+Менять код кроме типов нельзя, исходные типы менять тоже нельзя, но можно рефакторить
+Например `type A = 1 | 2` выразить как `type A1 = 1; type A2 = 2; type A = A1 | A2;`
+* */
 
-// // В функцию приходит массив состояний заказа и фильтруется
-// // Нужно заменить FIXME на тип который вычисляется на освове OrderState
+// В функцию приходит массив состояний заказа и фильтруется
+// Нужно заменить FIXME на тип который вычисляется на освове OrderState
 
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 // type FIXME = any;
 
-// const orderStates = [
-//   "initial",
-//   "inWork",
-//   "buyingSupplies",
-//   "producing",
-//   "fullfilled",
-// ] as const;
+const orderStates = [
+  "initial",
+  "inWork",
+  "buyingSupplies",
+  "producing",
+  "fullfilled",
+] as const;
 
-// type OrderState = typeof orderStates[number];
+type OrderState = (typeof orderStates)[number];
+type FilteredOrderState = Exclude<OrderState, "buyingSupplies" | "producing">;
 
-// export const getUserOrderStates = (orderStates: OrderState[]): FIXME => {
-//   const filteredStates = [] as FIXME;
-//   orderStates.forEach((element) => {
-//     if (element !== "buyingSupplies" && element !== "producing") {
-//       filteredStates.push(element);
-//     }
-//   });
-//   return filteredStates;
-// };
+export const getUserOrderStates = (
+  orderStates: OrderState[],
+): FilteredOrderState[] => {
+  const filteredStates = [] as FilteredOrderState[];
+  orderStates.forEach((element) => {
+    if (element !== "buyingSupplies" && element !== "producing") {
+      filteredStates.push(element);
+    }
+  });
+  return filteredStates;
+};
 
 // // Есть объединение (юнион) типов заказов в различных состояниях
 // // Нужно заменить FIXME на тип который достанет из Order все возможные состояния (state)
