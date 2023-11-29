@@ -35,10 +35,10 @@ export const getUserOrderStates = (
   return filteredStates;
 };
 
-// // Есть объединение (юнион) типов заказов в различных состояниях
-// // Нужно заменить FIXME на тип который достанет из Order все возможные состояния (state)
+// Есть объединение (юнион) типов заказов в различных состояниях
+// Нужно заменить FIXME на тип который достанет из Order все возможные состояния (state)
 
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 // type FIXME = any;
 
 type Order =
@@ -77,21 +77,22 @@ type Order =
 
 export const getOrderState = (order: Order): OrderStates => order.state;
 
-// // Есть общая функция omit которая удаляет поле из объекта и возвращает его без этого поля
-// // Нужно заменить FIXME на соответствующий тип
+// Есть общая функция omit которая удаляет поле из объекта и возвращает его без этого поля
+// Нужно заменить FIXME на соответствующий тип
 
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
 // type FIXME = any;
 
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// export const omit = <T extends Record<any, any>, K extends keyof T>(
-//   obj: T,
-//   keyToOmit: K
-// ): FIXME => {
-//   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//   const { [keyToOmit]: _, ...withoutKey } = obj;
-//   return withoutKey;
-// };
+type Omitted<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+export const omit = <T extends Record<any, any>, K extends keyof T>(
+  obj: T,
+  keyToOmit: K
+): Omitted<T, K> => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { [keyToOmit]: _, ...withoutKey } = obj;
+  return withoutKey;
+};
+
 
 // // Есть объединение (юнион) типов заказов в различных состояниях
 // // и функция filterOnlyInitialAndInWorkOrder которая принимает заказы в любых состояниях
