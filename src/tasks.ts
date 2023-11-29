@@ -139,24 +139,41 @@ export const filterOnlyInitialAndInWorkOrder = (
 // Есть функция которая достает из реакт компонента (любого, и Functional и Class) его defaultProps
 // Нужно заменить FIXME на правильный тип
 
-
 // Hint: infer
 export const getDefaultProps = <T>(
   component: React.ComponentType<T>,
 ): Partial<T> | undefined => component.defaultProps;
 
-// // Задача состоит в том что написать калькулятор для натуральных чисел, но только на типах!
-// // Ниже приведена заготовка
-// // Хочется поддержки сложения и вычитания, если хочется еще челленджа, то деление и умножение
-// // Из-за ограничений глубины вычислений поддержать все натуральные числа не получится, это нормально
+// Задача состоит в том что написать калькулятор для натуральных чисел, но только на типах!
+// Ниже приведена заготовка
+// Хочется поддержки сложения и вычитания, если хочется еще челленджа, то деление и умножение
+// Из-за ограничений глубины вычислений поддержать все натуральные числа не получится, это нормально
 
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// type FIXME = any;
+type Numbers = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-// type Equals<A, B> = A extends B ? (B extends A ? "success" : never) : never;
+type CreateArr<
+  N extends number,
+  Arr extends any[] = [],
+> = Arr["length"] extends N ? Arr : CreateArr<N, [...Arr, any]>;
 
-// type Add<A, B> = FIXME;
-// type Subtract<A, B> = FIXME;
+type Equal<A, B> = A extends B ? (B extends A ? "success" : never) : never;
 
-// export type OnePlusOneTest = Equals<Add<1, 1>, 2>;
-// export type TwoMinusOneTest = Equals<Subtract<2, 1>, 1>;
+type Add<A extends number, B extends number> = [
+  ...CreateArr<A>,
+  ...CreateArr<B>,
+]["length"];
+
+type SubtractOne<A extends number> = A extends infer N extends number
+  ? Numbers[N]
+  : never;
+
+type Subtract<
+  A extends number,
+  B extends number,
+  Counter extends any[] = [],
+> = Counter["length"] extends B
+  ? A
+  : Subtract<SubtractOne<A>, B, [any, ...Counter]>;
+
+export type OnePlusOneTest = Equal<Add<1, 1>, 2>;
+export type TwoMinusOneTest = Equal<Subtract<2, 1>, 1>;
