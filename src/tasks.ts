@@ -94,53 +94,54 @@ export const omit = <T extends Record<any, any>, K extends keyof T>(
 };
 
 
-// // Есть объединение (юнион) типов заказов в различных состояниях
-// // и функция filterOnlyInitialAndInWorkOrder которая принимает заказы в любых состояниях
-// // А возвращает только initial и inWork
-// // Нужно заменить FIXME на правильный тип вычисленный на основе Order
+// Есть объединение (юнион) типов заказов в различных состояниях
+// и функция filterOnlyInitialAndInWorkOrder которая принимает заказы в любых состояниях
+// А возвращает только initial и inWork
+// Нужно заменить FIXME на правильный тип вычисленный на основе Order
 
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// type FIXME = any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-// type Order =
-//   | {
-//       state: "initial";
-//       sum: number;
-//     }
-//   | {
-//       state: "inWork";
-//       sum: number;
-//       workerId: number;
-//     }
-//   | {
-//       state: "buyingSupplies";
-//       sum: number;
-//       workerId: number;
-//       suppliesSum: number;
-//     }
-//   | {
-//       state: "producing";
-//       sum: number;
-//       workerId: number;
-//       suppliesSum: number;
-//       produceEstimate: Date;
-//     }
-//   | {
-//       state: "fullfilled";
-//       sum: number;
-//       workerId: number;
-//       suppliesSum: number;
-//       produceEstimate: Date;
-//       fullfillmentDate: Date;
-//     };
+type InitialAndInWorkOrder = Extract<Order, { state: "initial" | "inWork" }>;
 
-// export const filterOnlyInitialAndInWorkOrder = (order: Order): FIXME => {
-//   if (order.state === "initial" || order.state === "inWork") {
-//     return order;
-//   }
+type TOrder =
+  | {
+      state: "initial";
+      sum: number;
+    }
+  | {
+      state: "inWork";
+      sum: number;
+      workerId: number;
+    }
+  | {
+      state: "buyingSupplies";
+      sum: number;
+      workerId: number;
+      suppliesSum: number;
+    }
+  | {
+      state: "producing";
+      sum: number;
+      workerId: number;
+      suppliesSum: number;
+      produceEstimate: Date;
+    }
+  | {
+      state: "fullfilled";
+      sum: number;
+      workerId: number;
+      suppliesSum: number;
+      produceEstimate: Date;
+      fullfillmentDate: Date;
+    };
 
-//   return null;
-// };
+export const filterOnlyInitialAndInWorkOrder = (order: TOrder): InitialAndInWorkOrder | null => {
+  if (order.state === "initial" || order.state === "inWork") {
+    return order;
+  }
+
+  return null;
+};
 
 // // Есть функция которая достает из реакт компонента (любого, и Functional и Class) его defaultProps
 // // Нужно заменить FIXME на правильный тип
@@ -155,7 +156,7 @@ export const omit = <T extends Record<any, any>, K extends keyof T>(
 //   return component.defaultProps;
 // };
 
-// // Задача состоит в том что написать калькулято для натуральных чисел, но только на типах!
+// // Задача состоит в том что написать калькулятор для натуральных чисел, но только на типах!
 // // Ниже приведена заготовка
 // // Хочется поддержки сложения и вычитания, если хочется еще челленджа, то деление и умножение
 // // Из-за ограничений глубины вычислений поддержать все натуральные числа не получится, это нормально
