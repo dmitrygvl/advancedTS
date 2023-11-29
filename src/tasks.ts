@@ -1,3 +1,5 @@
+import React from "react";
+
 /**
 Задание к TypeScript: Part 2 будет проверять ваше умение использовать и вычислять типы
 Все задания устроены таким образом что в них есть тип FIXME 
@@ -8,9 +10,6 @@
 
 // В функцию приходит массив состояний заказа и фильтруется
 // Нужно заменить FIXME на тип который вычисляется на освове OrderState
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// type FIXME = any;
 
 const orderStates = [
   "initial",
@@ -37,9 +36,6 @@ export const getUserOrderStates = (
 
 // Есть объединение (юнион) типов заказов в различных состояниях
 // Нужно заменить FIXME на тип который достанет из Order все возможные состояния (state)
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// type FIXME = any;
 
 type Order =
   | {
@@ -73,33 +69,28 @@ type Order =
       fullfillmentDate: Date;
     };
 
-  type OrderStates = Order['state'] 
+type OrderStates = Order["state"];
 
 export const getOrderState = (order: Order): OrderStates => order.state;
 
 // Есть общая функция omit которая удаляет поле из объекта и возвращает его без этого поля
 // Нужно заменить FIXME на соответствующий тип
 
-// type FIXME = any;
-
 type Omitted<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export const omit = <T extends Record<any, any>, K extends keyof T>(
   obj: T,
-  keyToOmit: K
+  keyToOmit: K,
 ): Omitted<T, K> => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { [keyToOmit]: _, ...withoutKey } = obj;
   return withoutKey;
 };
 
-
 // Есть объединение (юнион) типов заказов в различных состояниях
 // и функция filterOnlyInitialAndInWorkOrder которая принимает заказы в любых состояниях
 // А возвращает только initial и inWork
 // Нужно заменить FIXME на правильный тип вычисленный на основе Order
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 
 type InitialAndInWorkOrder = Extract<Order, { state: "initial" | "inWork" }>;
 
@@ -135,7 +126,9 @@ type TOrder =
       fullfillmentDate: Date;
     };
 
-export const filterOnlyInitialAndInWorkOrder = (order: TOrder): InitialAndInWorkOrder | null => {
+export const filterOnlyInitialAndInWorkOrder = (
+  order: TOrder,
+): InitialAndInWorkOrder | null => {
   if (order.state === "initial" || order.state === "inWork") {
     return order;
   }
@@ -143,18 +136,14 @@ export const filterOnlyInitialAndInWorkOrder = (order: TOrder): InitialAndInWork
   return null;
 };
 
-// // Есть функция которая достает из реакт компонента (любого, и Functional и Class) его defaultProps
-// // Нужно заменить FIXME на правильный тип
+// Есть функция которая достает из реакт компонента (любого, и Functional и Class) его defaultProps
+// Нужно заменить FIXME на правильный тип
 
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// type FIXME = any;
 
-// // Hint: infer
-// export const getDefaultProps = <T>(
-//   component: React.ComponentType<T>
-// ): FIXME => {
-//   return component.defaultProps;
-// };
+// Hint: infer
+export const getDefaultProps = <T>(
+  component: React.ComponentType<T>,
+): Partial<T> | undefined => component.defaultProps;
 
 // // Задача состоит в том что написать калькулятор для натуральных чисел, но только на типах!
 // // Ниже приведена заготовка
