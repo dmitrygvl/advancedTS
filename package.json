@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
+    "@types/react": "^18.2.39",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "eslint": "^8.54.0",
@@ -34,5 +35,8 @@
       "npx tsc --noEmit"
     ],
     "*.{css,md,yml}": "prettier --write ."
+  },
+  "dependencies": {
+    "react": "^18.2.0"
   }
 }

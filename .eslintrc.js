@@ -35,6 +35,7 @@ module.exports = {
         ignoreComments: true,
       },
     ],
+    "arrow-body-style": ["error", "as-needed"],
     "@typescript-eslint/no-unused-vars": 0,
     "@typescript-eslint/no-var-requires": 0,
     "import/prefer-default-export": "off",
