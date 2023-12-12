@@ -154,7 +154,7 @@ const config: Config = {
 
   // The test environment that will be used for testing
   testEnvironment: "jsdom",
-
+  verbose: true,
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
 
@@ -204,3 +204,8 @@ const config: Config = {
 };
 
 export default config;
+
+/**
+ * For a detailed explanation regarding each configuration property, visit:
+ * https://jestjs.io/docs/configuration
+ */

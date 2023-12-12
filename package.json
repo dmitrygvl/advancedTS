@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "lint": "prettier --check . && eslint . && stylelint \"**/*.scss\" && npx tsc --noEmi",
+    "lint": "prettier --check . && eslint . && stylelint \"**/*.scss\" && npx tsc --noEmit",
     "lint:fix": "prettier --write . && eslint . --fix  && stylelint \"**/*.scss\" --fix && npx tsc --noEmit",
     "prepare": "husky install",
     "check-ts": "tsc --noEmit",
