@@ -39,11 +39,11 @@ module.exports = {
     ...(isDev
       ? [new MiniCssExtractPlugin()]
       : [
-        new MiniCssExtractPlugin({
-          chunkFilename: "[name].[contenthash].css",
-          filename: "[name].[contenthash].css",
-        }),
-      ]),
+          new MiniCssExtractPlugin({
+            chunkFilename: "[name].[contenthash].css",
+            filename: "[name].[contenthash].css",
+          }),
+        ]),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name].[hash].css",
